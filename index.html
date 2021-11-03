@@ -4,14 +4,57 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+    </style>
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <title>Booking System</title>
   </head>
   <body>
+    <main>
+      <section class="glass">
+        <div class="dashboard">
+          <form name="form">
+            <div class="title">
+              <h3>New Booking</h3>
+            </div>
 
+            <div class="clientName">
+              <p>Type the name of the client</p>
+              <input type="text" name="client" />
+            </div>
 
+            <div class="peopleQuantity">
+              <p>Type the quantity of the people</p>
+              <input type="number" name="number-of-people" />
+            </div>
 
+            <div class="bookingHour">
+              <p>Select the hour of the booking</p>
+              <select name="hour">
+                <option value="">--Please choose an option--</option>
+                <option value="19">19:00 - 19:30</option>
+                <option value="20">20:00</option>
+                <option value="20:30">20:30</option>
+                <option value="21">21:00 - 21:30</option>
+              </select>
 
-    <script src="main.js""></script>
+              <div class="clientCellphone">
+                <p>Type the cellphone of the client</p>
+                <input type="number" required />
+              </div>
+
+              <div class="createNewBooking">
+                <button type="submit">Submit new booking</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+
+    <script src="main.js"></script>
   </body>
 </html>
