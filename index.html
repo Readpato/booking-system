@@ -14,40 +14,43 @@
     <main>
       <section class="glass">
         <div class="dashboard">
-          <form name="form">
+          <form name="form" class="form">
             <div class="title">
               <h3>New Booking</h3>
             </div>
 
-            <div class="clientName">
-              <p>Type the name of the client</p>
-              <input type="text" name="client" />
-            </div>
+            <div class="questions">
+              <div class="clientName">
+                <label>Type the name of the client</label>
+                <input type="text" name="client" />
+              </div>
 
-            <div class="peopleQuantity">
-              <p>Type the quantity of the people</p>
-              <input type="number" name="number-of-people" />
-            </div>
+              <div class="peopleQuantity">
+                <label>Type the quantity of the people</label>
+                <input type="number" name="number-of-people" />
+              </div>
 
-            <div class="bookingHour">
-              <p>Select the hour of the booking</p>
-              <select name="hour">
-                <option value="">--Please choose an option--</option>
-                <option value="19">19:00 - 19:30</option>
-                <option value="20">20:00</option>
-                <option value="20:30">20:30</option>
-                <option value="21">21:00 - 21:30</option>
-              </select>
-            </div>
+              <div class="bookingHour">
+                <label>Select the hour of the booking</label>
+                <select name="hour">
+                  <option value="">--Please choose an option--</option>
+                  <option value="19">19:00 - 19:30</option>
+                  <option value="20">20:00</option>
+                  <option value="20:30">20:30</option>
+                  <option value="21">21:00 - 21:30</option>
+                </select>
+              </div>
 
-            <div class="clientCellphone">
-              <p>Type the cellphone of the client</p>
-              <input type="number" name="cellphone" required />
+              <div class="clientCellphone">
+                <label>Type the cellphone of the client</label>
+                <input type="number" name="cellphone" required />
+              </div>
             </div>
-
             <div class="createNewBooking">
               <button type="submit">Submit new booking</button>
             </div>
+
+            <div name="errors" class="hidden"></div>
           </form>
         </div>
 

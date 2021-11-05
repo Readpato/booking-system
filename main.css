@@ -30,6 +30,7 @@ main {
   border-radius: 2rem;
   z-index: 2;
   backdrop-filter: blur(2rem);
+  display: flex;
 }
 
 .circle1,
@@ -54,4 +55,26 @@ main {
 .circle2 {
   bottom: 5%;
   left: 10%;
+}
+
+.dashboard {
+  flex: 1;
+  display: flex;
+}
+
+.bookings {
+  flex: 2;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2rem;
+  text-align: left;
+}
+
+.hidden {
+  display: none;
 }
