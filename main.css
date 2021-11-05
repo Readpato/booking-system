@@ -7,10 +7,25 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Poppins", sans-serif;
+}
+
+h1 {
+  text-decoration: underline;
+  color: #426696;
+  font-weight: 400;
+  font-size: 2rem;
+  opacity: 0.8;
+}
+
+p,
+label {
+  color: #658ec6;
+  font-weight: 500;
+  opacity: 0.8;
 }
 
 main {
+  font-family: "Poppins", sans-serif;
   min-height: 100vh;
   background: linear-gradient(to right top, #65dfc9, #6cdbeb);
   display: flex;
@@ -60,6 +75,12 @@ main {
 .dashboard {
   flex: 1;
   display: flex;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  border-radius: 2rem;
 }
 
 .bookings {
@@ -69,10 +90,25 @@ main {
 .form {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  padding: 2rem;
-  text-align: left;
+  text-align: center;
+}
+
+.form button {
+  margin-top: 5px;
+  font-size: 15px;
+  color: #658ec6;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.questions {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1rem 0rem;
 }
 
 .hidden {
