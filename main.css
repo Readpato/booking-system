@@ -12,7 +12,7 @@
 h1 {
   text-decoration: underline;
   color: #426696;
-  font-weight: 400;
+  font-weight: 550;
   font-size: 2rem;
   opacity: 0.8;
 }
@@ -63,7 +63,7 @@ main {
 }
 
 .circle1 {
-  top: 5%;
+  top: 2%;
   right: 15%;
 }
 
@@ -83,10 +83,6 @@ main {
   border-radius: 2rem;
 }
 
-.bookings {
-  flex: 2;
-}
-
 .form {
   display: flex;
   flex-direction: column;
@@ -101,6 +97,29 @@ main {
   color: #658ec6;
   font-weight: 500;
   opacity: 0.9;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.5)
+  );
+  border: none;
+  padding: 0.5rem;
+  border-radius: 2rem;
+}
+
+.form input,
+select {
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.5)
+  );
+  border: none;
+  width: 50%;
+  padding: 0.5rem;
+  border-radius: 2rem;
+  color: #658ec6;
+  text-align: center;
 }
 
 .questions {
@@ -109,6 +128,35 @@ main {
   flex-direction: column;
   justify-content: center;
   margin: 1rem 0rem;
+}
+
+/* BOOKINGS SECTION */
+
+.bookings {
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-grow: 2;
+}
+
+.bookings h1 {
+  flex-grow: 0;
+}
+
+.booking {
+  display: flex;
+  flex-grow: 2;
+  width: 100%;
+  background: linear-gradient(
+    to left top,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0.8)
+  );
+  border-radius: 1rem;
+  margin: 1rem 0rem;
+  padding: 1rem;
 }
 
 .hidden {
