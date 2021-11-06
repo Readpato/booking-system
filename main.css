@@ -115,7 +115,7 @@ select {
     rgba(255, 255, 255, 0.5)
   );
   border: none;
-  width: 50%;
+  width: 60%;
   padding: 0.5rem;
   border-radius: 2rem;
   color: #658ec6;
@@ -145,18 +145,23 @@ select {
   flex-grow: 0;
 }
 
+.bookings p {
+  text-decoration: underline;
+}
+
 .booking {
   display: flex;
   flex-grow: 2;
   width: 100%;
   background: linear-gradient(
     to left top,
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0.8)
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.5)
   );
   border-radius: 1rem;
-  margin: 1rem 0rem;
+  margin: 0.5rem 0rem;
   padding: 1rem;
+  box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.2);
 }
 
 .hidden {
