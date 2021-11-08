@@ -7,10 +7,25 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Poppins", sans-serif;
+}
+
+h1 {
+  text-decoration: underline;
+  color: #426696;
+  font-weight: 550;
+  font-size: 2rem;
+  opacity: 0.8;
+}
+
+p,
+label {
+  color: #658ec6;
+  font-weight: 500;
+  opacity: 0.8;
 }
 
 main {
+  font-family: "Poppins", sans-serif;
   min-height: 100vh;
   background: linear-gradient(to right top, #65dfc9, #6cdbeb);
   display: flex;
@@ -30,6 +45,7 @@ main {
   border-radius: 2rem;
   z-index: 2;
   backdrop-filter: blur(2rem);
+  display: flex;
 }
 
 .circle1,
@@ -47,11 +63,108 @@ main {
 }
 
 .circle1 {
-  top: 5%;
+  top: 2%;
   right: 15%;
 }
 
 .circle2 {
   bottom: 5%;
   left: 10%;
+}
+
+.dashboard {
+  flex: 1;
+  display: flex;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  border-radius: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.form button {
+  margin-top: 5px;
+  font-size: 15px;
+  color: #658ec6;
+  font-weight: 500;
+  opacity: 0.9;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.5)
+  );
+  border: none;
+  padding: 0.5rem;
+  border-radius: 2rem;
+}
+
+.form input,
+select {
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.5)
+  );
+  border: none;
+  width: 70%;
+  padding: 0.5rem;
+  border-radius: 2rem;
+  color: #658ec6;
+  text-align: center;
+}
+
+.questions {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1rem 0rem;
+}
+
+/* BOOKINGS SECTION */
+
+.bookings {
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-grow: 2;
+}
+
+.bookings h1 {
+  flex-grow: 0;
+}
+
+.bookings p {
+  text-decoration: underline;
+}
+
+.booking {
+  display: flex;
+  flex-grow: 2;
+  width: 100%;
+  background: linear-gradient(
+    to left top,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.4)
+  );
+  border-radius: 1rem;
+  margin: 0.5rem 0rem;
+  padding: 1rem;
+  box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.2);
+  justify-content: space-evenly;
+}
+
+.hidden {
+  display: none;
 }
