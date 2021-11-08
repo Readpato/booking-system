@@ -107,6 +107,10 @@ main {
   border-radius: 2rem;
 }
 
+.form button:hover {
+  cursor: pointer;
+}
+
 .form input,
 select {
   background: linear-gradient(
@@ -137,8 +141,8 @@ select {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
-  flex-grow: 2;
+  align-items: center;
+  flex-grow: 1;
 }
 
 .bookings h1 {
@@ -165,6 +169,47 @@ select {
   justify-content: space-evenly;
 }
 
+.gridContainer {
+  display: grid;
+  width: 100%;
+  grid-template-rows: 15% 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "box1 box2"
+    "box3 box3";
+}
+
 .hidden {
   display: none;
+}
+
+.box1 {
+  grid-area: box1;
+}
+
+.box2 {
+  grid-area: box2;
+  text-align: end;
+}
+
+.box2 strong {
+  text-decoration: none;
+}
+
+/*
+
+Find out why the box2 item wont go to the end of it's space
+Give the grid to every other booking item.
+ADD JS YAY
+
+*/
+
+.box3 {
+  grid-area: box3;
+  flex-direction: column;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-wrap: wrap;
+  color: #658ec6;
 }
