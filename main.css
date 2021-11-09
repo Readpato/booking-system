@@ -179,10 +179,6 @@ select {
     "box3 box3";
 }
 
-.hidden {
-  display: none;
-}
-
 .box1 {
   grid-area: box1;
 }
@@ -196,9 +192,12 @@ select {
   text-decoration: none;
 }
 
+.hidden {
+  display: none;
+}
 /*
 
-Find out why the box2 item wont go to the end of it's space
+Find out why the box2 item wont go to the end of it's space - text align
 Give the grid to every other booking item.
 ADD JS YAY
 
