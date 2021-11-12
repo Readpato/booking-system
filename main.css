@@ -192,10 +192,6 @@ select {
   text-decoration: none;
 }
 
-.hidden {
-  display: none;
-}
-
 .box3 {
   grid-area: box3;
   flex-direction: column;
@@ -204,4 +200,11 @@ select {
   align-items: center;
   flex-wrap: wrap;
   color: #658ec6;
+}
+
+.box3 p {
+  text-decoration: none;
+}
+.hidden {
+  display: none;
 }

@@ -10,15 +10,13 @@
 /* Global Variables */
 
 const $form = document.form;
-const $clientName = $form.clientName.value;
-const $peopleQuantity = $form["number-of-people"].value;
-const $clientCellphone = $form["client-cellphone"].value;
+
 
 // * Function that happens when the submit button is clicked.
 
 document.querySelector(".createNewBooking").onclick = function(event) {
 
-    selectBookingHour();
+    addReservation(selectBookingHour());
     event.preventDefault();
 }
 
@@ -33,7 +31,7 @@ function selectBookingHour() {
 
 
     if ($hourOfBooking === "19") {
-        return console.log($bookingsAt19);
+        return $bookingsAt19;
     }
     if ($hourOfBooking=== "20") {
         return $bookingsAt20;
@@ -44,4 +42,19 @@ function selectBookingHour() {
     if ($hourOfBooking=== "21") {
         return $bookingsAt21;
     }
+}
+
+
+// *Function that takes the values of the inputs and places them in the respective booking hour
+
+
+function addReservation(bookingHour) {
+    let clientName = $form.clientName.value;
+    let peopleQuantity = $form["number-of-people"].value;
+    let clientCellphone = $form["client-cellphone"].value;
+
+    let $newReservation = document.createElement("p")
+    $newReservation.innerText = `${clientName} - ${peopleQuantity} persons - ${clientCellphone}`;
+    
+    return bookingHour.appendChild($newReservation);
 }
