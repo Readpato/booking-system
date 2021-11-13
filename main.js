@@ -33,13 +33,13 @@ function selectBookingHour() {
     if ($hourOfBooking === "19") {
         return $bookingsAt19;
     }
-    if ($hourOfBooking=== "20") {
+    if ($hourOfBooking === "20") {
         return $bookingsAt20;
     }
-    if ($hourOfBooking=== "20:30") {
+    if ($hourOfBooking === "20:30") {
         return $bookingsAt2030;
     }
-    if ($hourOfBooking=== "21") {
+    if ($hourOfBooking === "21") {
         return $bookingsAt21;
     }
 }
@@ -53,7 +53,7 @@ function addReservation(bookingHour) {
     let peopleQuantity = $form["number-of-people"].value;
     let clientCellphone = $form["client-cellphone"].value;
 
-    let $newReservation = document.createElement("p")
+    let $newReservation = document.createElement("p");
     $newReservation.innerText = `${clientName} - ${peopleQuantity} persons - ${clientCellphone}`;
     
     return bookingHour.appendChild($newReservation);
