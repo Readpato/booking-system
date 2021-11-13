@@ -20,6 +20,11 @@ document.querySelector(".createNewBooking").onclick = function(event) {
     event.preventDefault();
 }
 
+// *Function that assess if there's still available space on an hour segment.
+
+function calculateAvailableSpace()
+
+
 // *Function that selects the hour of the reservation
 
 function selectBookingHour() {
