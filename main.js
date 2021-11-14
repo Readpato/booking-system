@@ -27,9 +27,11 @@ const $form = document.form;
 
 document.querySelector(".createNewBooking").onclick = function(event) {
     let hourOfBooking = document.form["hour-of-booking"].value;
+    let peopleQuantity = $form["number-of-people"].value;
 
     checkAvailableSpace(hourOfBooking)
-    addReservation(selectBookingSegment(hourOfBooking));
+    addReservation(selectBookingSegment(hourOfBooking), peopleQuantity);
+    updateAvailableSpace(hourOfBooking, peopleQuantity)
     event.preventDefault();
 }
 
@@ -37,31 +39,18 @@ document.querySelector(".createNewBooking").onclick = function(event) {
 
 function checkAvailableSpace(hourOfBooking) {
     
-    let availableSpace;
+    let availableSpace = Number(document.querySelector(`.availableSpace${hourOfBooking}`).innerText);
     let numberOfClients = Number($form["number-of-people"].value);
- 
-    if (hourOfBooking === "19") {
-        availableSpace = Number(document.querySelector(".availableSpace19").innerText);
-    } else if (hourOfBooking === "20") {
-        availableSpace = Number(document.querySelector(".availableSpace20").innerText);
-    } else if (hourOfBooking === "2030") {
-        availableSpace = Number(document.querySelector(".availableSpace2030").innerText);
-    } else if (hourOfBooking === "21") {
-        availableSpace = Number(document.querySelector(".availableSpace21").innerText);
-    } else {
-        return console.log("The booking hour wasn't selected.");
-    }
     
+    // !We ned to add a block if this happens, maybe a function that runs to manage the errors?
     if (availableSpace < 0 ) {
-        return console.log("There is no space for this booking");
+        return console.log("There is no space for this booking.");
     } 
-
     if (availableSpace - numberOfClients < 0) {
-        return console.log("There is no space for this booking");
+        return console.log("There is no space for this booking.");
     } else {
-        return console.log("There is space for this booking");
+        return;
     }}
-
 
 // *Function that selects the hour of the reservation
 
@@ -89,13 +78,10 @@ function selectBookingSegment(hourOfBooking) {
     }
 }
 
+// *Function that takes the values of the inputs and places them in the respective booking segment.
 
-// *Function that takes the values of the inputs and places them in the respective booking hour
-
-
-function addReservation(bookingHour) {
+function addReservation(bookingHour, peopleQuantity) {
     let clientName = $form.clientName.value;
-    let peopleQuantity = $form["number-of-people"].value;
     let clientCellphone = $form["client-cellphone"].value;
 
     let $newReservation = document.createElement("p");
@@ -103,3 +89,20 @@ function addReservation(bookingHour) {
     
     return bookingHour.appendChild($newReservation);
 }
+
+
+//* Function that updates the availableSpace counter
+
+function updateAvailableSpace(hourOfBooking, peopleQuantity) {
+    let availableSpace =  Number(document.querySelector(`.availableSpace${hourOfBooking}`).innerText);
+    let currentSpace = (availableSpace - peopleQuantity).toString();
+
+    if (currentSpace === "0") {
+        document.querySelector(`.availableSpace${hourOfBooking}`).classList.add("full"); 
+    } else {
+        document.querySelector(`.availableSpace${hourOfBooking}`).classList.remove("full");
+    }
+
+    return document.querySelector(`.availableSpace${hourOfBooking}`).innerText = currentSpace;
+}
+

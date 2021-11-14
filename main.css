@@ -205,6 +205,11 @@ select {
 .box3 p {
   text-decoration: none;
 }
+
 .hidden {
   display: none;
+}
+
+.full {
+  color: red;
 }
