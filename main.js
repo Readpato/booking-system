@@ -4,6 +4,17 @@
  * *The most important thing is to sort the reservations with the hour they chose to come and add the input values in them.
  * *Once a booking system is has reached its maximum capacity of 20 persons it should block itself and not allow any more bookings.
  * 
+ * *For the available space function, we need to grab the total (document.querySelector) value on the availableSpace element of each segment and then pass it to a number
+ * *Then substract from that number(Number(availableSpace)) the incoming booking. (NewBookingValue)
+ * *Once the available space goes down to 0, the segment is blocked and nothing else can be added to it.
+ * *(Maybe if we can remove the child-option from its parent-select) 
+ * 
+ * *The interesting thing is going to be when a booking is cancelled and we have to update the available space number to add numbers.
+ * *Maybe we can create a function that fetches the value of the available space each time an interaction with the bookings happens?
+ * *
+ * 
+ * 
+ * 
  * *Bonus: Create a button that eliminates a booking if clicked upon.
  *  */
 
@@ -15,37 +26,66 @@ const $form = document.form;
 // * Function that happens when the submit button is clicked.
 
 document.querySelector(".createNewBooking").onclick = function(event) {
+    let hourOfBooking = document.form["hour-of-booking"].value;
 
-    addReservation(selectBookingHour());
+    checkAvailableSpace(hourOfBooking)
+    addReservation(selectBookingSegment(hourOfBooking));
     event.preventDefault();
 }
 
 // *Function that assess if there's still available space on an hour segment.
 
-function calculateAvailableSpace()
+function checkAvailableSpace(hourOfBooking) {
+    
+    let availableSpace;
+    let numberOfClients = Number($form["number-of-people"].value);
+ 
+    if (hourOfBooking === "19") {
+        availableSpace = Number(document.querySelector(".availableSpace19").innerText);
+    } else if (hourOfBooking === "20") {
+        availableSpace = Number(document.querySelector(".availableSpace20").innerText);
+    } else if (hourOfBooking === "2030") {
+        availableSpace = Number(document.querySelector(".availableSpace2030").innerText);
+    } else if (hourOfBooking === "21") {
+        availableSpace = Number(document.querySelector(".availableSpace21").innerText);
+    } else {
+        return console.log("The booking hour wasn't selected.");
+    }
+    
+    if (availableSpace < 0 ) {
+        return console.log("There is no space for this booking");
+    } 
+
+    if (availableSpace - numberOfClients < 0) {
+        return console.log("There is no space for this booking");
+    } else {
+        return console.log("There is space for this booking");
+    }}
 
 
 // *Function that selects the hour of the reservation
 
-function selectBookingHour() {
-    let $hourOfBooking = document.form["hour-of-booking"].value;
+function selectBookingSegment(hourOfBooking) {
     const $bookingsAt19 = document.querySelector(".bookingsAt19");
     const $bookingsAt20 = document.querySelector(".bookingsAt20");
     const $bookingsAt2030 = document.querySelector(".bookingsAt2030");
     const $bookingsAt21 = document.querySelector(".bookingsAt21");
 
 
-    if ($hourOfBooking === "19") {
+    if (hourOfBooking === "19") {
         return $bookingsAt19;
     }
-    if ($hourOfBooking === "20") {
+    if (hourOfBooking === "20") {
         return $bookingsAt20;
     }
-    if ($hourOfBooking === "20:30") {
+    if (hourOfBooking === "2030") {
         return $bookingsAt2030;
     }
-    if ($hourOfBooking === "21") {
+    if (hourOfBooking === "21") {
         return $bookingsAt21;
+    }
+    if (hourOfBooking === "") {
+        return console.log("The booking hour wasn't selected");
     }
 }
 
@@ -59,7 +99,7 @@ function addReservation(bookingHour) {
     let clientCellphone = $form["client-cellphone"].value;
 
     let $newReservation = document.createElement("p");
-    $newReservation.innerText = `${clientName} - ${peopleQuantity} persons - ${clientCellphone}`;
+    $newReservation.innerText = `${clientName} - ${peopleQuantity} person(s) - ${clientCellphone}`;
     
     return bookingHour.appendChild($newReservation);
 }
