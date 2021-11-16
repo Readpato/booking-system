@@ -107,8 +107,6 @@ function updateAvailableSpace(hourOfBooking, peopleQuantity) {
         document.querySelector(`.booking${hourOfBooking}`).classList.remove("full-booking");
         document.querySelector(`.option${hourOfBooking}`).removeAttribute("disabled");
     }
-
-    
     return document.querySelector(`.availableSpace${hourOfBooking}`).innerText = currentSpace;
 }
 
