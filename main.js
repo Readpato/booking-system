@@ -31,7 +31,7 @@ document.querySelector(".createNewBooking").onclick = function(event) {
 
     checkAvailableSpace(hourOfBooking)
     addReservation(selectBookingSegment(hourOfBooking), peopleQuantity);
-    updateAvailableSpace(hourOfBooking, peopleQuantity)
+    updateAvailableSpace(hourOfBooking, peopleQuantity);
     event.preventDefault();
 }
 
@@ -97,12 +97,18 @@ function updateAvailableSpace(hourOfBooking, peopleQuantity) {
     let availableSpace =  Number(document.querySelector(`.availableSpace${hourOfBooking}`).innerText);
     let currentSpace = (availableSpace - peopleQuantity).toString();
 
-    if (currentSpace === "0") {
-        document.querySelector(`.availableSpace${hourOfBooking}`).classList.add("full"); 
-    } else {
+    if (currentSpace <= "0") {
+        document.querySelector(`.availableSpace${hourOfBooking}`).classList.add("full");
+        document.querySelector(`.booking${hourOfBooking}`).classList.add("full-booking");
+        document.querySelector(`.option${hourOfBooking}`).setAttribute("disabled", "");
+
+    } else if (currentSpace > 0) {
         document.querySelector(`.availableSpace${hourOfBooking}`).classList.remove("full");
+        document.querySelector(`.booking${hourOfBooking}`).classList.remove("full-booking");
+        document.querySelector(`.option${hourOfBooking}`).removeAttribute("disabled");
     }
 
+    
     return document.querySelector(`.availableSpace${hourOfBooking}`).innerText = currentSpace;
 }
 
