@@ -122,10 +122,10 @@ function validateName(clientName) {
     if(clientName.length >= 50) {
         return "The name of the client is too long."
     }
-
+  
     if(regEx.test(clientName) === false) {
         return "The name of the client has not been inserted correctly."
     }
 
     return '';
-}
+};
