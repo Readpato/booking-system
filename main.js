@@ -129,3 +129,21 @@ function validateName(clientName) {
 
     return '';
 };
+
+function validateClientQuantity(peopleQuantity) {
+    const regEx = /^[0-9]{1,2}$/;
+
+    if (!peopleQuantity) {
+        return "The quantity of people has not been given."
+    }
+
+    if (peopleQuantity > 20) {
+        return "The quantity of people exceeeds the booking hour capacity."
+    }
+
+    if (regEx.test(peopleQuantity) === false) {
+        return "The quantity of people has invalid characters."
+    }
+
+    return "";
+}

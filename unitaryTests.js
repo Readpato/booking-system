@@ -12,4 +12,19 @@ function testNameValidation() {
     )
 }
 
+function testClientQuantitityValidation() {
+    console.assert(validateClientQuantity("") === "The quantity of people has not been given.",
+    "The function validateClientQuantity didn't check if the quantity is empty."
+    );
+
+    console.assert(validateClientQuantity(25) === "The quantity of people exceeeds the booking hour capacity.",
+    "The function validateClientQuantity didn't check if the quantitiy exceeds the booking segment size."
+    );
+
+    console.assert(validateClientQuantity("Hello there!") === "The quantity of people has invalid characters.",
+    "The function validateClientQuantity didn't check if there are invalid characters."
+    )
+}
+
+testClientQuantitityValidation();
 testNameValidation();
