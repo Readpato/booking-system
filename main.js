@@ -101,7 +101,6 @@ function updateAvailableSpace(hourOfBooking, peopleQuantity) {
         document.querySelector(`.availableSpace${hourOfBooking}`).classList.add("full");
         document.querySelector(`.booking${hourOfBooking}`).classList.add("full-booking");
         document.querySelector(`.option${hourOfBooking}`).setAttribute("disabled", "");
-
     } else if (currentSpace > 0) {
         document.querySelector(`.availableSpace${hourOfBooking}`).classList.remove("full");
         document.querySelector(`.booking${hourOfBooking}`).classList.remove("full-booking");
@@ -110,3 +109,23 @@ function updateAvailableSpace(hourOfBooking, peopleQuantity) {
     return document.querySelector(`.availableSpace${hourOfBooking}`).innerText = currentSpace;
 }
 
+//* Functions that validate the inputs.
+
+function validateName(clientName) {
+    
+    const regEx = /^[a-z]+ [a-z]+$/i;
+
+    if(!clientName) {
+        return "The name of the client has not been given."
+    }
+
+    if(clientName.length >= 50) {
+        return "The name of the client is too long."
+    }
+
+    if(regEx.test(clientName) === false) {
+        return "The name of the client has not been inserted correctly."
+    }
+
+    return '';
+}
