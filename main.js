@@ -177,7 +177,7 @@ function validateClientCellphone(clientCellphone) {
 
 // TODO We also need to create the function that handles the errors and the element where it will appear in HTML.
 
-// * Function that handles the errors from the form.
+// * Function that validates the form.
 
 function validateForm(event, clientName, peopleQuantity, hourOfBooking, clientCellphone) {
     
@@ -194,5 +194,38 @@ function validateForm(event, clientName, peopleQuantity, hourOfBooking, clientCe
     }
 
     console.table(errors);
-}
+
+
+};
+
+
+
+// * Function that handles the errors.
+
+function errorHandling(errors) {
+
+    const error = errors;
+    const keys = Object.keys(errors);
+    let errorQuantity = 0;
+
+
+    keys.forEach(function(key) {
+        if (error[key]) {
+            $form[key].classList.add('error');
+            $form[key].value = '';
+        
+            const $errorsList = $form.errorsList;
+            const $error = document.createElement('li');
+            $error.textContent = error[key];
+            $error.className = 'existingError';
+            $errorsList.appendChild($error);
+
+            errorQuantity++;
+        } else {
+            $form.key.className = '';
+        }
+
+    });
+    return errorQuantity;
+};
 
