@@ -155,6 +155,8 @@ function validateBookingHour(hourOfBooking) {
     if(!hourOfBooking) {
         return "The hour of the booking hasn't been selected."
     };
+
+    return "";
 };
 
 function validateClientCellphone(clientCellphone) {
@@ -165,15 +167,14 @@ function validateClientCellphone(clientCellphone) {
         return "The client cellphone has not been specified."
     };
 
-    if (clientCellphone === false) {
+    if (regEx.test(clientCellphone) === false) {
         return "The client cellphone is not valid."
     };
-}
 
-/* 
- TODO We need to create the function that validates the input for the hour of the booking and the cellphone of the client.
- TODO We also need to create the validations on the unitaryTests.js file.
- TODO We also need to create the function that handles the errors and the element where it will appear in HTML.
-*/
+    return "";
+};
+
+
+// TODO We also need to create the function that handles the errors and the element where it will appear in HTML.
 
 

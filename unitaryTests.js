@@ -34,6 +34,23 @@ function testBookingHourValidation() {
     );
 };
 
-testClientQuantitityValidation();
-testNameValidation();
-testBookingHourValidation();
+function testClientCellphoneValidation() {
+
+    console.assert(validateClientCellphone("") === "The client cellphone has not been specified.",
+    "The function validateClientCellphone didn't check if the field is empty."
+    );
+
+    console.assert(validateClientCellphone("+A193 9139 Adnz") === "The client cellphone is not valid.",
+    "The function validateClientCellphone didn't check if the cellphone was correct."
+    );
+
+};
+
+function unitaryTestsForm() {
+    testClientQuantitityValidation();
+    testNameValidation();
+    testBookingHourValidation();
+    testClientCellphoneValidation();  
+};
+
+unitaryTestsForm();
