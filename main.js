@@ -28,12 +28,13 @@ const $form = document.form;
 document.querySelector(".createNewBooking").onclick = function(event) {
     let hourOfBooking = document.form["hour-of-booking"].value;
     let peopleQuantity = $form["number-of-people"].value;
+    let clientCellphone = $form["client-cellphone"].value;
 
     checkAvailableSpace(hourOfBooking)
-    addReservation(selectBookingSegment(hourOfBooking), peopleQuantity);
+    addReservation(selectBookingSegment(hourOfBooking), peopleQuantity, clientCellphone);
     updateAvailableSpace(hourOfBooking, peopleQuantity);
     event.preventDefault();
-}
+};
 
 // *Function that assess if there's still available space on an hour segment.
 
@@ -50,7 +51,8 @@ function checkAvailableSpace(hourOfBooking) {
         return console.log("There is no space for this booking.");
     } else {
         return;
-    }}
+    }
+};
 
 // *Function that selects the hour of the reservation
 
@@ -76,19 +78,18 @@ function selectBookingSegment(hourOfBooking) {
     if (hourOfBooking === "") {
         return console.log("The booking hour wasn't selected");
     }
-}
+};
 
 // *Function that takes the values of the inputs and places them in the respective booking segment.
 
-function addReservation(bookingHour, peopleQuantity) {
+function addReservation(bookingHour, peopleQuantity, clientCellphone) {
     let clientName = $form.clientName.value;
-    let clientCellphone = $form["client-cellphone"].value;
 
     let $newReservation = document.createElement("p");
     $newReservation.innerText = `${clientName} - ${peopleQuantity} person(s) - ${clientCellphone}`;
     
     return bookingHour.appendChild($newReservation);
-}
+};
 
 
 //* Function that updates the availableSpace counter
@@ -105,9 +106,9 @@ function updateAvailableSpace(hourOfBooking, peopleQuantity) {
         document.querySelector(`.availableSpace${hourOfBooking}`).classList.remove("full");
         document.querySelector(`.booking${hourOfBooking}`).classList.remove("full-booking");
         document.querySelector(`.option${hourOfBooking}`).removeAttribute("disabled");
-    }
+    };
     return document.querySelector(`.availableSpace${hourOfBooking}`).innerText = currentSpace;
-}
+};
 
 //* Functions that validate the inputs.
 
@@ -117,15 +118,15 @@ function validateName(clientName) {
 
     if(!clientName) {
         return "The name of the client has not been given."
-    }
+    };
 
     if(clientName.length >= 50) {
         return "The name of the client is too long."
-    }
+    };
   
     if(regEx.test(clientName) === false) {
         return "The name of the client has not been inserted correctly."
-    }
+    };
 
     return '';
 };
@@ -135,15 +136,44 @@ function validateClientQuantity(peopleQuantity) {
 
     if (!peopleQuantity) {
         return "The quantity of people has not been given."
-    }
+    };
 
     if (peopleQuantity > 20) {
         return "The quantity of people exceeeds the booking hour capacity."
-    }
+    };
 
     if (regEx.test(peopleQuantity) === false) {
         return "The quantity of people has invalid characters."
-    }
+    };
 
     return "";
+};
+
+
+function validateBookingHour(hourOfBooking) {
+
+    if(!hourOfBooking) {
+        return "The hour of the booking hasn't been selected."
+    };
+};
+
+function validateClientCellphone(clientCellphone) {
+
+    const regEx = /\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\W*\d\W*\d\W*\d\W*\d\W*\d\W*\d\W*\d\W*\d\W*(\d{1,2})$/;
+
+    if (!clientCellphone) {
+        return "The client cellphone has not been specified."
+    };
+
+    if (clientCellphone === false) {
+        return "The client cellphone is not valid."
+    };
 }
+
+/* 
+ TODO We need to create the function that validates the input for the hour of the booking and the cellphone of the client.
+ TODO We also need to create the validations on the unitaryTests.js file.
+ TODO We also need to create the function that handles the errors and the element where it will appear in HTML.
+*/
+
+
