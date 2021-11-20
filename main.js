@@ -22,19 +22,74 @@
 
 const $form = document.form;
 
-
 // * Function that happens when the submit button is clicked.
 
-document.querySelector(".createNewBooking").onclick = function(event) {
+$form.onsubmit = validateForm;
+
+function validateForm(event) {
+    
+    let clientName = $form.clientName.value;
     let hourOfBooking = document.form["hour-of-booking"].value;
     let peopleQuantity = $form["number-of-people"].value;
     let clientCellphone = $form["client-cellphone"].value;
 
+    const errorName = validateName(clientName);
+    const errorQuantity = validateClientQuantity(peopleQuantity);
+    const errorBookingHour = validateBookingHour(hourOfBooking);
+    const errorClientCellphone = validateClientCellphone(clientCellphone);
+
+    const errors = {
+        clientName: errorName,
+        "number-of-people": errorQuantity,
+        "hour-of-booking": errorBookingHour,
+        "client-cellphone": errorClientCellphone        
+    };
+
+    console.table(errors);
+
+    const success = errorHandling(errors) === 0;
+
+} // * This basically says that if the function is TRUE, you should run it.
+    if (success) {
+    //* Here we have to add a validation to check the available space.
     checkAvailableSpace(hourOfBooking)
-    addReservation(selectBookingSegment(hourOfBooking), peopleQuantity, clientCellphone);
+    addReservation(clientName, selectBookingSegment(hourOfBooking), peopleQuantity, clientCellphone);
     updateAvailableSpace(hourOfBooking, peopleQuantity);
     event.preventDefault();
+
 };
+
+// * Function that handles the errors.
+
+function errorHandling(errors) {
+
+    const error = errors;
+    const keys = Object.keys(errors);
+    let errorQuantity = 0;
+
+
+    keys.forEach(function(key) {
+        if (error[key]) {
+            $form[key].classList.add('error');
+            $form[key].value = '';
+        
+            const $errorsList = document.querySelector('.errorsList');
+            const $error = document.createElement('li');
+            $error.textContent = error[key];
+            $error.className = 'existingError';
+            $errorsList.appendChild($error);
+
+            errorQuantity++;
+        } else {
+            $form[key].className = '';
+        }
+
+    });
+    return errorQuantity;
+};
+
+
+// TODO We also need to create the function that handles the errors and the element where it will appear in HTML.
 
 // *Function that assess if there's still available space on an hour segment.
 
@@ -82,8 +137,7 @@ function selectBookingSegment(hourOfBooking) {
 
 // *Function that takes the values of the inputs and places them in the respective booking segment.
 
-function addReservation(bookingHour, peopleQuantity, clientCellphone) {
-    let clientName = $form.clientName.value;
+function addReservation(clientName, bookingHour, peopleQuantity, clientCellphone) {
 
     let $newReservation = document.createElement("p");
     $newReservation.innerText = `${clientName} - ${peopleQuantity} person(s) - ${clientCellphone}`;
@@ -173,59 +227,3 @@ function validateClientCellphone(clientCellphone) {
 
     return "";
 };
-
-
-// TODO We also need to create the function that handles the errors and the element where it will appear in HTML.
-
-// * Function that validates the form.
-
-function validateForm(event, clientName, peopleQuantity, hourOfBooking, clientCellphone) {
-    
-    const errorName = validateName(clientName);
-    const errorQuantity = validateClientQuantity(peopleQuantity);
-    const errorBookingHour = validateBookingHour(hourOfBooking);
-    const errorClientCellphone = validateClientCellphone(clientCellphone);
-
-    const errors = {
-        clientName: errorName,
-        "number-of-people": errorQuantity,
-        "hour-of-booking": errorBookingHour,
-        "client-cellphone": errorClientCellphone        
-    }
-
-    console.table(errors);
-
-
-};
-
-
-
-// * Function that handles the errors.
-
-function errorHandling(errors) {
-
-    const error = errors;
-    const keys = Object.keys(errors);
-    let errorQuantity = 0;
-
-
-    keys.forEach(function(key) {
-        if (error[key]) {
-            $form[key].classList.add('error');
-            $form[key].value = '';
-        
-            const $errorsList = $form.errorsList;
-            const $error = document.createElement('li');
-            $error.textContent = error[key];
-            $error.className = 'existingError';
-            $errorsList.appendChild($error);
-
-            errorQuantity++;
-        } else {
-            $form.key.className = '';
-        }
-
-    });
-    return errorQuantity;
-};
-
