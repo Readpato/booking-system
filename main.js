@@ -72,7 +72,7 @@ function errorHandling(errors) {
 
     keys.forEach(function(key) {
         if (error[key]) {
-            $form[key].classList.add('error');
+            $form[key].id = ('error');
             $form[key].value = '';
         
             const $errorsList = document.querySelector('.errorsList');
@@ -83,15 +83,12 @@ function errorHandling(errors) {
 
             errorQuantity++;
         } else {
-            $form[key].className = '';
+            $form[key].id = '';
         }
 
     });
     return errorQuantity;
 };
-
-
-// TODO We also need to create the function that handles the errors and the element where it will appear in HTML.
 
 // *Function that assess if there's still available space on an hour segment.
 
