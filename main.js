@@ -22,18 +22,72 @@
 
 const $form = document.form;
 
-
 // * Function that happens when the submit button is clicked.
 
-document.querySelector(".createNewBooking").onclick = function(event) {
+$form.onsubmit = validateForm;
+
+function validateForm(event) {
+    
+    let clientName = $form.clientName.value;
     let hourOfBooking = document.form["hour-of-booking"].value;
     let peopleQuantity = $form["number-of-people"].value;
     let clientCellphone = $form["client-cellphone"].value;
 
-    checkAvailableSpace(hourOfBooking)
-    addReservation(selectBookingSegment(hourOfBooking), peopleQuantity, clientCellphone);
-    updateAvailableSpace(hourOfBooking, peopleQuantity);
+    const errorName = validateName(clientName);
+    const errorQuantity = validateClientQuantity(peopleQuantity);
+    const errorBookingHour = validateBookingHour(hourOfBooking);
+    const errorClientCellphone = validateClientCellphone(clientCellphone);
+
+    const errors = {
+        clientName: errorName,
+        "number-of-people": errorQuantity,
+        "hour-of-booking": errorBookingHour,
+        "client-cellphone": errorClientCellphone        
+    };
+
+    console.table(errors);
+
+    const success = errorHandling(errors) === 0;
+
+    // * This basically says that if the function is TRUE, you should run it.
+    if (success) {
+        if (checkAvailableSpace(hourOfBooking) === true ) {
+        addReservation(clientName, selectBookingSegment(hourOfBooking), peopleQuantity, clientCellphone);
+        updateAvailableSpace(hourOfBooking, peopleQuantity);
+        };
+    };
+    
     event.preventDefault();
+
+};
+
+// * Function that handles the errors.
+
+function errorHandling(errors) {
+
+    const error = errors;
+    const keys = Object.keys(errors);
+    let errorQuantity = 0;
+
+
+    keys.forEach(function(key) {
+        if (error[key]) {
+            $form[key].id = ('error');
+            $form[key].value = '';
+        
+            const $errorsList = document.querySelector('.errorsList');
+            const $error = document.createElement('li');
+            $error.textContent = error[key];
+            $error.className = 'existingError';
+            $errorsList.appendChild($error);
+
+            errorQuantity++;
+        } else {
+            $form[key].id = '';
+        }
+
+    });
+    return errorQuantity;
 };
 
 // *Function that assess if there's still available space on an hour segment.
@@ -43,15 +97,23 @@ function checkAvailableSpace(hourOfBooking) {
     let availableSpace = Number(document.querySelector(`.availableSpace${hourOfBooking}`).innerText);
     let numberOfClients = Number($form["number-of-people"].value);
     
-    // !We ned to add a block if this happens, maybe a function that runs to manage the errors?
     if (availableSpace < 0 ) {
-        return console.log("There is no space for this booking.");
-    } 
-    if (availableSpace - numberOfClients < 0) {
-        return console.log("There is no space for this booking.");
+        const $errorsList = document.querySelector('.errorsList');
+        const $error = document.createElement('li');
+        $error.textContent = "There is no space for this booking.";
+        $error.className = 'existingError';
+        $errorsList.appendChild($error);
+        return false;
+    } else if (availableSpace - numberOfClients < 0) {
+        const $errorsList = document.querySelector('.errorsList');
+        const $error = document.createElement('li');
+        $error.textContent = "There is no space for this booking.";
+        $error.className = 'existingError';
+        $errorsList.appendChild($error);
+        return false;
     } else {
-        return;
-    }
+        return true;
+    };
 };
 
 // *Function that selects the hour of the reservation
@@ -82,8 +144,7 @@ function selectBookingSegment(hourOfBooking) {
 
 // *Function that takes the values of the inputs and places them in the respective booking segment.
 
-function addReservation(bookingHour, peopleQuantity, clientCellphone) {
-    let clientName = $form.clientName.value;
+function addReservation(clientName, bookingHour, peopleQuantity, clientCellphone) {
 
     let $newReservation = document.createElement("p");
     $newReservation.innerText = `${clientName} - ${peopleQuantity} person(s) - ${clientCellphone}`;
@@ -139,7 +200,7 @@ function validateClientQuantity(peopleQuantity) {
     };
 
     if (peopleQuantity > 20) {
-        return "The quantity of people exceeeds the booking hour capacity."
+        return "The quantity of people exceeds the booking hour capacity."
     };
 
     if (regEx.test(peopleQuantity) === false) {
@@ -173,8 +234,3 @@ function validateClientCellphone(clientCellphone) {
 
     return "";
 };
-
-
-// TODO We also need to create the function that handles the errors and the element where it will appear in HTML.
-
-
