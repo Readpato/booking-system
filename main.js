@@ -49,12 +49,14 @@ function validateForm(event) {
 
     const success = errorHandling(errors) === 0;
 
-} // * This basically says that if the function is TRUE, you should run it.
+    // * This basically says that if the function is TRUE, you should run it.
     if (success) {
-    //* Here we have to add a validation to check the available space.
-    checkAvailableSpace(hourOfBooking)
-    addReservation(clientName, selectBookingSegment(hourOfBooking), peopleQuantity, clientCellphone);
-    updateAvailableSpace(hourOfBooking, peopleQuantity);
+        if (checkAvailableSpace(hourOfBooking) === true ) {
+        addReservation(clientName, selectBookingSegment(hourOfBooking), peopleQuantity, clientCellphone);
+        updateAvailableSpace(hourOfBooking, peopleQuantity);
+        };
+    };
+    
     event.preventDefault();
 
 };
@@ -98,15 +100,23 @@ function checkAvailableSpace(hourOfBooking) {
     let availableSpace = Number(document.querySelector(`.availableSpace${hourOfBooking}`).innerText);
     let numberOfClients = Number($form["number-of-people"].value);
     
-    // !We ned to add a block if this happens, maybe a function that runs to manage the errors?
     if (availableSpace < 0 ) {
-        return console.log("There is no space for this booking.");
-    } 
-    if (availableSpace - numberOfClients < 0) {
-        return console.log("There is no space for this booking.");
+        const $errorsList = document.querySelector('.errorsList');
+        const $error = document.createElement('li');
+        $error.textContent = "There is no space for this booking.";
+        $error.className = 'existingError';
+        $errorsList.appendChild($error);
+        return false;
+    } else if (availableSpace - numberOfClients < 0) {
+        const $errorsList = document.querySelector('.errorsList');
+        const $error = document.createElement('li');
+        $error.textContent = "There is no space for this booking.";
+        $error.className = 'existingError';
+        $errorsList.appendChild($error);
+        return false;
     } else {
-        return;
-    }
+        return true;
+    };
 };
 
 // *Function that selects the hour of the reservation
@@ -193,7 +203,7 @@ function validateClientQuantity(peopleQuantity) {
     };
 
     if (peopleQuantity > 20) {
-        return "The quantity of people exceeeds the booking hour capacity."
+        return "The quantity of people exceeds the booking hour capacity."
     };
 
     if (regEx.test(peopleQuantity) === false) {

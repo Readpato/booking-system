@@ -18,7 +18,7 @@ function testClientQuantitityValidation() {
     "The function validateClientQuantity didn't check if the quantity is empty."
     );
 
-    console.assert(validateClientQuantity(25) === "The quantity of people exceeeds the booking hour capacity.",
+    console.assert(validateClientQuantity(25) === "The quantity of people exceeds the booking hour capacity.",
     "The function validateClientQuantity didn't check if the quantitiy exceeds the booking segment size."
     );
 
