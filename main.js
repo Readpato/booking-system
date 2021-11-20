@@ -58,7 +58,6 @@ function validateForm(event) {
     };
     
     event.preventDefault();
-
 };
 
 // * Function that handles the errors.
@@ -127,19 +126,19 @@ function selectBookingSegment(hourOfBooking) {
 
     if (hourOfBooking === "19") {
         return $bookingsAt19;
-    }
+    };
     if (hourOfBooking === "20") {
         return $bookingsAt20;
-    }
+    };
     if (hourOfBooking === "2030") {
         return $bookingsAt2030;
-    }
+    };
     if (hourOfBooking === "21") {
         return $bookingsAt21;
-    }
+    };
     if (hourOfBooking === "") {
         return console.log("The booking hour wasn't selected");
-    }
+    };
 };
 
 // *Function that takes the values of the inputs and places them in the respective booking segment.
