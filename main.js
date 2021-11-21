@@ -20,6 +20,8 @@
 
 /* Global Variables */
 
+// ! Add function that deletes old errors!
+
 const $form = document.form;
 
 // * Function that happens when the submit button is clicked.
