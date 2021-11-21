@@ -49,6 +49,8 @@ function validateForm(event) {
 
     console.table(errors);
 
+    deletePreviousErrors();
+
     const success = errorHandling(errors) === 0;
 
     // * This basically says that if the function is TRUE, you should run it.
@@ -212,6 +214,7 @@ function validateClientQuantity(peopleQuantity) {
 };
 
 
+
 function validateBookingHour(hourOfBooking) {
 
     if(!hourOfBooking) {
@@ -235,3 +238,16 @@ function validateClientCellphone(clientCellphone) {
 
     return "";
 };
+
+
+// *Function that removes previous errors.
+
+function deletePreviousErrors() {
+    let previousErrors = document.querySelectorAll(".existingError");
+
+    previousErrors.forEach(function(error) {
+        return error.remove();
+    }
+)};
+
+
