@@ -20,6 +20,8 @@
 
 /* Global Variables */
 
+// ! Add function that deletes old errors!
+
 const $form = document.form;
 
 // * Function that happens when the submit button is clicked.
@@ -46,6 +48,8 @@ function validateForm(event) {
     };
 
     console.table(errors);
+
+    deletePreviousErrors();
 
     const success = errorHandling(errors) === 0;
 
@@ -210,6 +214,7 @@ function validateClientQuantity(peopleQuantity) {
 };
 
 
+
 function validateBookingHour(hourOfBooking) {
 
     if(!hourOfBooking) {
@@ -233,3 +238,16 @@ function validateClientCellphone(clientCellphone) {
 
     return "";
 };
+
+
+// *Function that removes previous errors.
+
+function deletePreviousErrors() {
+    let previousErrors = document.querySelectorAll(".existingError");
+
+    previousErrors.forEach(function(error) {
+        return error.remove();
+    }
+)};
+
+
