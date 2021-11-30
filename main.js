@@ -72,7 +72,6 @@ function errorHandling(errors) {
     const keys = Object.keys(errors);
     let errorQuantity = 0;
 
-
     keys.forEach(function(key) {
         if (error[key]) {
             $form[key].id = ('error');
