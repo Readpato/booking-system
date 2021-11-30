@@ -134,6 +134,14 @@ select {
   margin: 1rem 0rem;
 }
 
+.buttons-container {
+  display: flex;
+}
+
+.buttons-container .delete-booking-button {
+  margin-left: 1rem;
+}
+
 /* *BOOKINGS SECTION */
 
 .bookings {
