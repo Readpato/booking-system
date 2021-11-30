@@ -64,6 +64,16 @@ function validateForm(event) {
     event.preventDefault();
 };
 
+// *Function that runs when the event handler is called on the delete button.
+
+document.querySelector('.delete-booking-button').onclick = function(event) {
+    let checkedBookings = document.querySelectorAll('input[type="checkbox"]:checked');
+
+    deleteExistingBooking(checkedBookings);
+    
+    event.preventDefault();
+};
+
 // * Function that handles the errors.
 
 function errorHandling(errors) {
@@ -93,6 +103,8 @@ function errorHandling(errors) {
 };
 
 // *Function that assess if there's still available space on an hour segment.
+
+// TODO Add a logical operator OR here.
 
 function checkAvailableSpace(hourOfBooking) {
     
@@ -148,9 +160,17 @@ function selectBookingSegment(hourOfBooking) {
 
 function addReservation(clientName, bookingHour, peopleQuantity, clientCellphone) {
 
-    let $newReservation = document.createElement("p");
-    $newReservation.innerText = `${clientName} - ${peopleQuantity} person(s) - ${clientCellphone}`;
     
+    
+    let $newReservation = document.createElement('div');
+    let $checkbox = document.createElement('input');
+    $checkbox.type = 'checkbox';
+    let $paragraph = document.createElement("p");
+    $paragraph.innerText = `${clientName} - ${peopleQuantity} person(s) - ${clientCellphone}`;
+    
+    $newReservation.appendChild($checkbox);
+    $newReservation.appendChild($paragraph);
+
     return bookingHour.appendChild($newReservation);
 };
 
@@ -249,4 +269,11 @@ function deletePreviousErrors() {
     }
 )};
 
+//* Function that removes checked bookings.
 
+function deleteExistingBooking(existingBooking) {
+    
+    existingBooking.forEach(function(booking){
+        booking.parentElement.remove();
+    });
+};
