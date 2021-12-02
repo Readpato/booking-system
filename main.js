@@ -47,8 +47,6 @@ function validateForm(event) {
         "client-cellphone": errorClientCellphone        
     };
 
-    console.table(errors);
-
     deletePreviousErrors();
 
     const success = errorHandling(errors) === 0;
@@ -56,10 +54,21 @@ function validateForm(event) {
     // * This basically says that if the function is TRUE, you should run it.
     if (success) {
         if (checkAvailableSpace(hourOfBooking) === true ) {
-        addReservation(clientName, selectBookingSegment(hourOfBooking), peopleQuantity, clientCellphone);
+        addReservation(clientName, selectBookingSegment(hourOfBooking), peopleQuantity, clientCellphone, hourOfBooking);
         updateAvailableSpace(hourOfBooking, peopleQuantity);
         };
     };
+    
+    event.preventDefault();
+};
+
+// *Function that runs when the event handler is called on the delete button.
+
+document.querySelector('.delete-booking-button').onclick = function(event) {
+    let checkedBookings = document.querySelectorAll('input[type="checkbox"]:checked');
+
+    deleteExistingBooking(checkedBookings);
+    restoredCanceledSpace();
     
     event.preventDefault();
 };
@@ -94,19 +103,14 @@ function errorHandling(errors) {
 
 // *Function that assess if there's still available space on an hour segment.
 
+// TODO Add a logical operator OR here.
+
 function checkAvailableSpace(hourOfBooking) {
     
     let availableSpace = Number(document.querySelector(`.availableSpace${hourOfBooking}`).innerText);
     let numberOfClients = Number($form["number-of-people"].value);
     
-    if (availableSpace < 0 ) {
-        const $errorsList = document.querySelector('.errorsList');
-        const $error = document.createElement('li');
-        $error.textContent = "There is no space for this booking.";
-        $error.className = 'existingError';
-        $errorsList.appendChild($error);
-        return false;
-    } else if (availableSpace - numberOfClients < 0) {
+    if (availableSpace < 0 || availableSpace - numberOfClients < 0) {
         const $errorsList = document.querySelector('.errorsList');
         const $error = document.createElement('li');
         $error.textContent = "There is no space for this booking.";
@@ -146,11 +150,22 @@ function selectBookingSegment(hourOfBooking) {
 
 // *Function that takes the values of the inputs and places them in the respective booking segment.
 
-function addReservation(clientName, bookingHour, peopleQuantity, clientCellphone) {
+function addReservation(clientName, bookingHour, peopleQuantity, clientCellphone, hourOfBooking) {
 
-    let $newReservation = document.createElement("p");
-    $newReservation.innerText = `${clientName} - ${peopleQuantity} person(s) - ${clientCellphone}`;
-    
+    let $newReservation = document.createElement('div');
+    $newReservation.className = "existing-booking";
+    let $checkbox = document.createElement('input');
+    $checkbox.type = 'checkbox';
+    let $paragraph = document.createElement("p");
+    $paragraph.innerText = `${clientName} - ${clientCellphone} - Quantity: `;
+    let $quantityOfPeople = document.createElement('div');
+    $quantityOfPeople.className = `quantity-at-${hourOfBooking}`
+    $quantityOfPeople.innerText = `${peopleQuantity}`
+
+    $newReservation.appendChild($checkbox);
+    $newReservation.appendChild($paragraph);
+    $newReservation.appendChild($quantityOfPeople);
+
     return bookingHour.appendChild($newReservation);
 };
 
@@ -159,9 +174,11 @@ function addReservation(clientName, bookingHour, peopleQuantity, clientCellphone
 
 function updateAvailableSpace(hourOfBooking, peopleQuantity) {
     let availableSpace =  Number(document.querySelector(`.availableSpace${hourOfBooking}`).innerText);
-    let currentSpace = (availableSpace - peopleQuantity).toString();
+    let currentSpace = (availableSpace - peopleQuantity);
 
-    if (currentSpace <= "0") {
+    // Necesito hacer que la cantidad total de clientes de los clientes totales sea igual al currentSpace
+
+    if (currentSpace <= 0) {
         document.querySelector(`.availableSpace${hourOfBooking}`).classList.add("full");
         document.querySelector(`.booking${hourOfBooking}`).classList.add("full-booking");
         document.querySelector(`.option${hourOfBooking}`).setAttribute("disabled", "");
@@ -239,6 +256,8 @@ function validateClientCellphone(clientCellphone) {
 };
 
 
+
+
 // *Function that removes previous errors.
 
 function deletePreviousErrors() {
@@ -249,4 +268,48 @@ function deletePreviousErrors() {
     }
 )};
 
+//* Function that removes checked bookings.
+
+function deleteExistingBooking(existingBooking) {
+    
+    existingBooking.forEach(function(booking){
+        booking.parentElement.remove();
+    });
+};
+
+
+//* Function that restores the available space to a booking segment.
+
+function restoredCanceledSpace() {
+
+    const bookingHours = [19, 20, 2030, 21];
+
+    bookingHours.forEach(function(hour){
+        let totalQuantityOfPeople = document.querySelectorAll(`.quantity-at-${hour}`);
+        if (totalQuantityOfPeople.length === 0) {
+            document.querySelector(`.availableSpace${hour}`).classList.remove("full");
+            document.querySelector(`.booking${hour}`).classList.remove("full-booking");
+            document.querySelector(`.option${hour}`).removeAttribute("disabled");
+            return document.querySelector(`.availableSpace${hour}`).innerText = 20;
+        }
+
+        for (let i = 0; i < totalQuantityOfPeople.length; i++) {
+        let accumulator = 0 + Number(totalQuantityOfPeople[i].innerText);
+        let totalSpace = 20;
+        let newAvailableSpace = totalSpace - accumulator;
+
+        if (newAvailableSpace <= 0) {
+            document.querySelector(`.availableSpace${hour}`).classList.add("full");
+            document.querySelector(`.booking${hour}`).classList.add("full-booking");
+            document.querySelector(`.option${hour}`).setAttribute("disabled", "");
+        } else if (newAvailableSpace > 0) {
+            document.querySelector(`.availableSpace${hour}`).classList.remove("full");
+            document.querySelector(`.booking${hour}`).classList.remove("full-booking");
+            document.querySelector(`.option${hour}`).removeAttribute("disabled");
+        };
+        return document.querySelector(`.availableSpace${hour}`).innerText = newAvailableSpace;    
+        };
+    });
+    return;
+};
 
