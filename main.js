@@ -12,15 +12,11 @@
  * *The interesting thing is going to be when a booking is cancelled and we have to update the available space number to add numbers.
  * *Maybe we can create a function that fetches the value of the available space each time an interaction with the bookings happens?
  * *
- * 
- * 
- * 
  * *Bonus: Create a button that eliminates a booking if clicked upon.
- *  */
+ *  
+*/
 
-/* Global Variables */
-
-// ! Add function that deletes old errors!
+// * Global Variables 
 
 const $form = document.form;
 
@@ -103,8 +99,6 @@ function errorHandling(errors) {
 
 // *Function that assess if there's still available space on an hour segment.
 
-// TODO Add a logical operator OR here.
-
 function checkAvailableSpace(hourOfBooking) {
     
     let availableSpace = Number(document.querySelector(`.availableSpace${hourOfBooking}`).innerText);
@@ -143,9 +137,6 @@ function selectBookingSegment(hourOfBooking) {
     if (hourOfBooking === "21") {
         return $bookingsAt21;
     };
-    if (hourOfBooking === "") {
-        return console.log("The booking hour wasn't selected");
-    };
 };
 
 // *Function that takes the values of the inputs and places them in the respective booking segment.
@@ -159,8 +150,8 @@ function addReservation(clientName, bookingHour, peopleQuantity, clientCellphone
     let $paragraph = document.createElement("p");
     $paragraph.innerText = `${clientName} - ${clientCellphone} - Quantity: `;
     let $quantityOfPeople = document.createElement('div');
-    $quantityOfPeople.className = `quantity-at-${hourOfBooking}`
-    $quantityOfPeople.innerText = `${peopleQuantity}`
+    $quantityOfPeople.className = `quantity-at-${hourOfBooking}`;
+    $quantityOfPeople.innerText = `${peopleQuantity}`;
 
     $newReservation.appendChild($checkbox);
     $newReservation.appendChild($paragraph);
@@ -230,7 +221,6 @@ function validateClientQuantity(peopleQuantity) {
 };
 
 
-
 function validateBookingHour(hourOfBooking) {
 
     if(!hourOfBooking) {
@@ -254,9 +244,6 @@ function validateClientCellphone(clientCellphone) {
 
     return "";
 };
-
-
-
 
 // *Function that removes previous errors.
 
@@ -291,7 +278,7 @@ function restoredCanceledSpace() {
             document.querySelector(`.booking${hour}`).classList.remove("full-booking");
             document.querySelector(`.option${hour}`).removeAttribute("disabled");
             return document.querySelector(`.availableSpace${hour}`).innerText = 20;
-        }
+        };
 
         for (let i = 0; i < totalQuantityOfPeople.length; i++) {
         let accumulator = 0 + Number(totalQuantityOfPeople[i].innerText);
