@@ -49,6 +49,8 @@ The user needs to insert valid input fields to correctly add a booking:
 - The hour of the booking needs to be selected to submit the booking.
 - The cellphone needs to comply with european standards (+xx xxx xxx xx xx).
 
+<img  src="https://github.com/Readpato/booking-system/blob/main/project-images/proper-booking.PNG" align="center">
+
 Once a segment reached its max capacity, the segment cannot be chosen again until there is new space available. This will be signaled with the container turning red and the number of available space turning red.
 
 To delete a function, a booking needs to be selected from its correspondent checkbox and then click the "Delete Booking" button. (There can be many bookings deleted at the same time.).
