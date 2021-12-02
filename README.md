@@ -44,10 +44,10 @@ The handling of the app is pretty straightforward.
 
 The user needs to insert valid input fields to correctly add a booking:
 
-- Name of the client must be First Name and Last Name
+- Name of the client must be First Name and Last Name.
 - The quantity of the people needs to be a number.
 - The hour of the booking needs to be selected to submit the booking.
-- The cellphone needs to comply with european standards (+xx xxx xxx xx xx);
+- The cellphone needs to comply with european standards (+xx xxx xxx xx xx).
 
 Once a segment reached its max capacity, the segment cannot be chosen again until there is new space available. This will be signaled with the container turning red and the number of available space turning red.
 
@@ -61,7 +61,7 @@ To delete a function, a booking needs to be selected from its correspondent chec
 
 - Objects are pretty good to handle errors. To be able to use the keys and values from objects to sort out the erros that can be produced when the app is running is pretty important.
 
-- Interpolation of variables is pretty important! You can interpolate a lot of things and that facilitates the code. The complicated thing is to start thinking abstractly, but once you got it, it improves your code so much
+- Interpolation of variables is pretty important! You can interpolate a lot of things and that facilitates the code. The complicated thing is to start thinking abstractly, but once you got it, it improves your code so much.
 
 - To add a disabled attribute to an HTML element you have can use the setAttribute function but, it has to have the value of "". If not, you are going to find an error!
 
@@ -85,7 +85,7 @@ document.querySelector(`.option${hour}`).setAttribute("disabled", "");
 
 ## Support
 
-If some error should appear, you can contact through
+If some error should appear, you can contact me through:
 
 - Twitter: @patoraedler
 - Email: patoraedler@gmail.com
