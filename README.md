@@ -53,7 +53,11 @@ The user needs to insert valid input fields to correctly add a booking:
 
 Once a segment reached its max capacity, the segment cannot be chosen again until there is new space available. This will be signaled with the container turning red and the number of available space turning red.
 
+<img  src="https://github.com/Readpato/booking-system/blob/main/project-images/full-space-booking.PNG" align="center">
+
 To delete a function, a booking needs to be selected from its correspondent checkbox and then click the "Delete Booking" button. (There can be many bookings deleted at the same time.).
+
+<img  src="https://github.com/Readpato/booking-system/blob/main/project-images/selected-checkbox.PNG" align="center">
 
 #
 
