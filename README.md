@@ -10,7 +10,7 @@ The project is aimed for people that work in any place where there is the need t
 
 The interface basically takes the user input on the requested fields and then it transports them to the correct booking segment of choice.
 
-If a booking needs to be cancelled the user can easily check the checkbox that is created when a booking is submited and then click "Delete Booking"
+If a booking needs to be cancelled the user can easily check the checkbox that is created when a booking is submitted and then click "Delete Booking".
 
 ### Technologies Used
 

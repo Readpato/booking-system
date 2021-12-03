@@ -167,8 +167,6 @@ function updateAvailableSpace(hourOfBooking, peopleQuantity) {
     let availableSpace =  Number(document.querySelector(`.availableSpace${hourOfBooking}`).innerText);
     let currentSpace = (availableSpace - peopleQuantity);
 
-    // Necesito hacer que la cantidad total de clientes de los clientes totales sea igual al currentSpace
-
     if (currentSpace <= 0) {
         document.querySelector(`.availableSpace${hourOfBooking}`).classList.add("full");
         document.querySelector(`.booking${hourOfBooking}`).classList.add("full-booking");
